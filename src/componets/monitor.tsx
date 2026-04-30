@@ -1,136 +1,150 @@
-function Monitor() {
+import { useEffect } from "react";
+function Keyboard() {
+  useEffect(() => {
+    const keys = document.querySelectorAll(".key");
+
+    const getKeyElement = (event: KeyboardEvent) => {
+      return Array.from(keys).find((element) => {
+        const keyElement = element as HTMLElement;
+        const label = keyElement.innerText.trim();
+
+        return (
+          event.code === `Key${label}` ||
+          keyElement.classList.contains(event.code)
+        );
+      }) as HTMLElement | undefined;
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.repeat) {
+        return;
+      }
+
+      const keyElement = getKeyElement(e);
+
+      if (keyElement) {
+        keyElement.classList.add("keyHover");
+      }
+      console.log(e.code);
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      const keyElement = getKeyElement(e);
+
+      if (keyElement) {
+        keyElement.classList.remove("keyHover");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
   return (
     <>
-      <div className="relative rounded-lg bg-slate-900 p-2">
-        <div className="relative flex text-center">
-          <div className="flex pl-3.5 pt-3">
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="-ml-0.5 mr-1.5 h-3 w-3 text-red-500/20"
-            >
-              <circle r="12" cy="12" cx="12"></circle>
-            </svg>
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="-ml-0.75 mr-1.5 h-3 w-3 text-yellow-500/20"
-            >
-              <circle r="12" cy="12" cx="12"></circle>
-            </svg>
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="-ml-0.75 mr-1.5 h-3 w-3 text-green-500/20"
-            >
-              <circle r="12" cy="12" cx="12"></circle>
-            </svg>
-          </div>
-          <span className="absolute inset-x-0 top-2 text-xs text-slate-500">
-            ProgressBar.tsx
-          </span>
+      <div className="keyboard">
+        <div className="row">
+          <div className="key Escape function-key">esc</div>
+          <div className="key F1 function-key">F1</div>
+          <div className="key F2 function-key">F2</div>
+          <div className="key F3 function-key">F3</div>
+          <div className="key F4 function-key">F4</div>
+          <div className="key F5 function-key">F5</div>
+          <div className="key F6 function-key">F6</div>
+          <div className="key F7 function-key">F7</div>
+          <div className="key F8 function-key">F8</div>
+          <div className="key F9 function-key">F9</div>
+          <div className="key F10 function-key">F10</div>
+          <div className="key F11 function-key">F11</div>
+          <div className="key F12 function-key">F12</div>
+          <div className="key Backspace eject-key">⏏</div>
         </div>
-        <div className="mt-5 space-y-1.5 px-5 pb-10">
-          <p className="mt-4 font-mono text-xs font-normal tracking-wide text-violet-400">
-            <span className="text-slate-500">&lt;</span>
-            <span className="text-pink-400">Card</span>
-            <span className="text-slate-500">&gt;</span>
-          </p>
-          <p className="ml-3 font-mono text-xs font-normal tracking-wide text-violet-400">
-            <span className="text-slate-500">&lt;</span>
-            <span className="text-pink-400">Text</span>
-            <span className="text-slate-500">&gt;</span>
-            <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-500/10">
-              <span className="relative text-blue-400">Ticket Sales</span>
-            </span>
-            <span className="text-slate-500">&lt;/</span>
-            <span className="text-pink-400">Text</span>
-            <span className="text-slate-500">&gt;</span>
-          </p>
-          <p className="ml-3 font-mono text-xs font-normal leading-4 tracking-wide text-violet-400">
-            <span className="text-slate-500">&lt;</span>
-            <span className="text-pink-400">Metric</span>
-            <span className="text-slate-500">&gt;</span>
-            <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-500/10">
-              <span className="relative text-blue-400">$ 71,465</span>
-            </span>
-            <span className="text-slate-500">&lt;/</span>
-            <span className="text-pink-400">Metric</span>
-            <span className="text-slate-500">&gt;</span>
-          </p>
-          <p className="ml-3 font-mono text-xs font-normal tracking-wide text-violet-400">
-            <span className="text-slate-500">&lt;</span>
-            <span className="text-pink-400">Flex</span>
-            <span className="ml-2 text-violet-400">
-              className<span className="text-slate-500">=</span>
-              <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-500/10">
-                <span className="relative text-blue-400">"mt-3"</span>
-              </span>
-            </span>
-            <span className="text-slate-500">&gt;</span>
-          </p>
-          <p className="ml-6 font-mono text-xs font-normal tracking-wide text-violet-400">
-            <span className="text-slate-500">&lt;</span>
-            <span className="text-pink-400">Text</span>
-            <span className="text-slate-500">&gt;</span>
-            <span className="text-slate-500">&lt;</span>
-            <span className="text-pink-400">Bold</span>
-            <span className="text-slate-500">&gt;</span>
-            <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-500/10">
-              <span className="relative text-blue-400">32%</span>
-            </span>
-            <span className="text-slate-500">&lt;/</span>
-            <span className="text-pink-400">Bold</span>
-            <span className="text-slate-500">&gt;</span>
-            <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-500/10">
-              <span className="relative text-blue-400">of annual target</span>
-            </span>
-            <span className="text-slate-500">&lt;/</span>
-            <span className="text-pink-400">Text</span>
-            <span className="text-slate-500">&gt;</span>
-          </p>
-          <p className="ml-6 font-mono text-xs font-normal tracking-wide text-violet-400">
-            <span className="text-slate-500">&lt;</span>
-            <span className="text-pink-400">Text</span>
-            <span className="text-slate-500">&gt;</span>
-            <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-500/10">
-              <span className="relative text-blue-400">$ 223,328</span>
-            </span>
-            <span className="text-slate-500">&lt;/</span>
-            <span className="text-pink-400">Text</span>
-            <span className="text-slate-500">&gt;</span>
-          </p>
-          <p className="ml-3 font-mono text-xs font-normal tracking-wide text-violet-400">
-            <span className="text-slate-500">&lt;/</span>
-            <span className="text-pink-400">Flex</span>
-            <span className="text-slate-500">&gt;</span>
-          </p>
-          <p className="ml-3 font-mono text-xs font-normal leading-4 tracking-wide text-violet-400">
-            <span className="text-slate-500">&lt;</span>
-            <span className="text-pink-400">ProgressBar</span>
-            <span className="ml-2 text-violet-400">
-              value<span className="text-slate-500">=</span>
-              <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-500/10">
-                <span className="relative text-blue-400">{32}</span>
-              </span>
-            </span>
-            <span className="ml-2 text-violet-400">
-              className<span className="text-slate-500">=</span>
-              <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-500/10">
-                <span className="relative text-blue-400">"mt-3"</span>
-              </span>
-            </span>
-            <span className="text-slate-500">/&gt;</span>
-          </p>
-          <p className="font-mono text-xs font-normal tracking-wide text-violet-400">
-            <span className="text-slate-500">&lt;/</span>
-            <span className="text-pink-400">Card</span>
-            <span className="text-slate-500">&gt;</span>
-          </p>
+
+        <div className="row">
+          <div className="key Backquote">`</div>
+          <div className="key Digit1">1</div>
+          <div className="key Digit2">2</div>
+          <div className="key Digit3">3</div>
+          <div className="key Digit4">4</div>
+          <div className="key Digit5">5</div>
+          <div className="key Digit6">6</div>
+          <div className="key Digit7">7</div>
+          <div className="key Digit8">8</div>
+          <div className="key Digit9">9</div>
+          <div className="key Digit0">0</div>
+          <div className="key Minus">-</div>
+          <div className="key Equal">=</div>
+          <div className="key Delete delete-key">delete</div>
+        </div>
+
+        <div className="row">
+          <div className="key Tab">tab</div>
+          <div className="key">Q</div>
+          <div className="key">W</div>
+          <div className="key">E</div>
+          <div className="key">R</div>
+          <div className="key">T</div>
+          <div className="key">Y</div>
+          <div className="key">U</div>
+          <div className="key">I</div>
+          <div className="key">O</div>
+          <div className="key">P</div>
+          <div className="key BracketLeft">[</div>
+          <div className="key BracketRight">]</div>
+          <div className="key Backslash backslash-key">\</div>
+        </div>
+
+        <div className="row">
+          <div className="key CapsLock">caps lock</div>
+          <div className="key">A</div>
+          <div className="key">S</div>
+          <div className="key">D</div>
+          <div className="key">F</div>
+          <div className="key">G</div>
+          <div className="key">H</div>
+          <div className="key">J</div>
+          <div className="key">K</div>
+          <div className="key">L</div>
+          <div className="key Semicolon">;</div>
+          <div className="key Quote">'</div>
+          <div className="key return-key Enter">Enter</div>
+        </div>
+
+        <div className="row">
+          <div className="key ShiftLeft">shift</div>
+          <div className="key">Z</div>
+          <div className="key">X</div>
+          <div className="key">C</div>
+          <div className="key">V</div>
+          <div className="key">B</div>
+          <div className="key">N</div>
+          <div className="key">M</div>
+          <div className="key Comma">,</div>
+          <div className="key Period">.</div>
+          <div className="key Slash">/</div>
+          <div className="key ShiftRight">shift</div>
+        </div>
+
+        <div className="row">
+          <div className="key">fn</div>
+          <div className="key ControlLeft">ctrl</div>
+          <div className="key AltLeft">⌥</div>
+          <div className="key command-key">⌘</div>
+          <div className="key Space"></div>
+          <div className="key command-key">⌘</div>
+          <div className="key alt-key">⌥</div>
+          <div className="key arrow-key">◀</div>
+          <div className="key arrow-key">▼</div>
+          <div className="key arrow-key">▲</div>
+          <div className="key arrow-key">▶</div>
         </div>
       </div>
     </>
   );
 }
 
-export default Monitor;
+export default Keyboard;
