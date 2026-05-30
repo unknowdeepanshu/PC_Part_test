@@ -28,6 +28,7 @@ function Keyboard() {
         keyElement.classList.add("keyHover");
       }
       console.log(e.code);
+      console.log(e.key);
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
