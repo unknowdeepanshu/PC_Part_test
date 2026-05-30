@@ -4,7 +4,7 @@ import Keyboard from "./componets/keyboard/KeyboardOne";
 function App() {
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex justify-center mb-10">
         <Keyboard />
       </div>
       <div className="ticks"></div>
