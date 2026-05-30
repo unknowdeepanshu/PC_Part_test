@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import "./keyboard.css";
 function Keyboard() {
   useEffect(() => {
     const keys = document.querySelectorAll(".key");
@@ -16,6 +17,7 @@ function Keyboard() {
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      e.preventDefault();
       if (e.repeat) {
         return;
       }
@@ -29,6 +31,7 @@ function Keyboard() {
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
+      e.preventDefault();
       const keyElement = getKeyElement(e);
 
       if (keyElement) {
@@ -135,12 +138,12 @@ function Keyboard() {
           <div className="key AltLeft">⌥</div>
           <div className="key command-key">⌘</div>
           <div className="key Space"></div>
-          <div className="key command-key">⌘</div>
-          <div className="key alt-key">⌥</div>
-          <div className="key arrow-key">◀</div>
-          <div className="key arrow-key">▼</div>
-          <div className="key arrow-key">▲</div>
-          <div className="key arrow-key">▶</div>
+          <div className="key MetaRight command-key">⌘</div>
+          <div className="key AltRight alt-key">⌥</div>
+          <div className="key ArrowLeft arrow-key">◀</div>
+          <div className="key ArrowDown arrow-key">▼</div>
+          <div className="key ArrowUp arrow-key">▲</div>
+          <div className="key ArrowRight arrow-key">▶</div>
         </div>
       </div>
     </>

@@ -1,5 +1,5 @@
 import "./App.css";
-import Keyboard from "./componets/monitor";
+import Keyboard from "./componets/keyboard/KeyboardOne";
 
 function App() {
   return (
@@ -8,7 +8,6 @@ function App() {
         <Keyboard />
       </div>
       <div className="ticks"></div>
-
       <section id="next-steps">
         <div id="social">
           <svg className="icon" role="presentation" aria-hidden="true">
