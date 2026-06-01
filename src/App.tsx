@@ -1,24 +1,17 @@
 import { useState } from "react";
 import "./App.css";
 import Keyboard from "./componets/keyboard/KeyboardOne";
-import { Easylevel, Mediumlevel, Hardlevel } from "./componets/levels";
 import SelectLevel from "./componets/selectLevels/chooseLevel";
+import LevelMode from "./componets/levels/levelMode";
 
 function App() {
   const [Level, setlevel] = useState<string>("");
   return (
     <>
       <div className="font-mono flex items-center flex-col justify-center mb-10">
-        {!Level && <SelectLevel setlevel={setlevel} />}
-        {Level === "Easy" ?
-          <Easylevel />
-        : <></>}
-        {Level === "Medium" ?
-          <Mediumlevel />
-        : <></>}
-        {Level === "Hard" ?
-          <Hardlevel />
-        : <></>}
+        {!Level ?
+          <SelectLevel setlevel={setlevel} />
+        : <LevelMode Levels={Level} />}
       </div>
       <div className="flex justify-center mb-10">
         <Keyboard />
